@@ -1,9 +1,13 @@
 package com.example.framework.base;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
@@ -48,6 +52,7 @@ public abstract class BaseAct<VM extends BaseVM, VDB extends ViewDataBinding>
         setContentView(getContentViewId());
         binding = DataBindingUtil.setContentView(this,getContentViewId());
         binding.setLifecycleOwner(this);
+        setStatusBar();
         createViewModel();
         runFlow();
     }
@@ -65,5 +70,19 @@ public abstract class BaseAct<VM extends BaseVM, VDB extends ViewDataBinding>
             }
             mViewModel = (VM) new ViewModelProvider(this).get(modelClass);
         }
+    }
+
+    /**
+    *沉浸式状态栏
+    */
+    protected void setStatusBar(){
+        if (Build.VERSION.SDK_INT >= 21){
+            View view = getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            view.setSystemUiVisibility(option);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
     }
 }
