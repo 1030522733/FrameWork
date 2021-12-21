@@ -1,7 +1,11 @@
 package com.example.framework.base;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
+
+import com.example.framework.network.FrameWorkNetworkInfo;
+import com.example.framework.network.NetworkApi;
 
 /**
  * @Author: JianTours
@@ -9,6 +13,7 @@ import android.content.Context;
  * @Description:配置全局Application
  */
 public class App extends Application {
+    @SuppressLint("StaticFieldLeak")
     private static App app;
 
     public static Context getContext(){return app;}
@@ -16,6 +21,8 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        //初始化
+        NetworkApi.init(new FrameWorkNetworkInfo(this));
         app = this;
     }
 }

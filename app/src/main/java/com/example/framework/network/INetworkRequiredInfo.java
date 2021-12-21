@@ -1,5 +1,7 @@
 package com.example.framework.network;
 
+import android.app.Application;
+
 import com.example.framework.base.App;
 
 /**
@@ -26,5 +28,5 @@ public interface INetworkRequiredInfo {
     /**
      *获取全局上下文参数
      */
-    App getApplicationContext();
+    Application getApplicationContext();
 }

@@ -1,8 +1,13 @@
 package com.example.framework.ui.act;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
+import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.R;
 import com.example.framework.base.BaseAct;
 import com.example.framework.databinding.ActStartBinding;
+import com.example.framework.model.BannerBean;
 import com.example.framework.vm.StartVM;
 
 /**
@@ -11,6 +16,7 @@ import com.example.framework.vm.StartVM;
  * @Description: 启动页
  */
 public class StartAct extends BaseAct<StartVM, ActStartBinding> {
+
     @Override
     protected int getContentViewId() {
         return R.layout.act_start;
@@ -18,5 +24,7 @@ public class StartAct extends BaseAct<StartVM, ActStartBinding> {
 
     @Override
     protected void runFlow() {
+        mViewModel.getBanner();
+        mViewModel.mutableLiveData.observe(this, BannerBean -> binding.setViewModel(mViewModel));
     }
 }

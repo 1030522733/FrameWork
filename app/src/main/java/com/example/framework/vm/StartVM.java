@@ -3,8 +3,12 @@ package com.example.framework.vm;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.base.BaseVM;
+import com.example.framework.model.BannerBean;
 
 /**
  * @Author: JianTours
@@ -12,7 +16,15 @@ import com.example.framework.base.BaseVM;
  * @Description: 启动页VM
  */
 public class StartVM extends BaseVM {
+
+    //mutableLiveData数据只给前台调用
+    public MutableLiveData<BannerBean> mutableLiveData;
+
     public StartVM(@NonNull Application application) {
         super(application);
+    }
+
+    public void getBanner() {
+        mutableLiveData = new MainRepository().getBanner();
     }
 }

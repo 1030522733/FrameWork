@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-<!--        <variable-->
-<!--            name="viewModel"-->
-<!--            type="com.example.framework.vm.StartVM" />-->
+        <variable
+            name="viewModel"
+            type="com.example.framework.vm.StartVM" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.act.StartAct">
+
+        <com.example.framework.ui.vv.CustomImageView
+            networkUrl="@{viewModel.mutableLiveData.data.get(0).imagePath}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
