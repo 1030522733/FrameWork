@@ -1,5 +1,9 @@
 package com.example.framework.ui.act;
 
+import android.content.Intent;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -8,7 +12,10 @@ import com.example.framework.R;
 import com.example.framework.base.BaseAct;
 import com.example.framework.databinding.ActStartBinding;
 import com.example.framework.model.BannerBean;
+import com.example.framework.ui.frg.HomeFrg;
+import com.example.framework.utils.MVUtils;
 import com.example.framework.vm.StartVM;
+import com.tencent.mmkv.MMKV;
 
 /**
  * @Author: JianTours
@@ -26,5 +33,11 @@ public class StartAct extends BaseAct<StartVM, ActStartBinding> {
     protected void runFlow() {
         mViewModel.getBanner();
         mViewModel.mutableLiveData.observe(this, BannerBean -> binding.setViewModel(mViewModel));
+        binding.imgStart.setOnClickListener(view -> {
+            startActivity(new Intent(StartAct.this,HomeAct.class));
+        });
+
+        binding.btStart.setOnClickListener(view -> {
+        });
     }
 }

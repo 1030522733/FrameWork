@@ -23,10 +23,6 @@ import java.lang.reflect.Type;
  */
 public abstract class BaseAct<VM extends BaseVM, VDB extends ViewDataBinding>
         extends AppCompatActivity {
-    /**
-    *获取Tag
-    */
-    protected final String TAG = this.getClass().getSimpleName();
 
     /**
     *上下文
