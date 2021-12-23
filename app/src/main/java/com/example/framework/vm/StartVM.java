@@ -3,12 +3,11 @@ package com.example.framework.vm;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.base.BaseVM;
 import com.example.framework.model.BannerBean;
+import com.example.framework.repository.MainRepository;
 
 /**
  * @Author: JianTours

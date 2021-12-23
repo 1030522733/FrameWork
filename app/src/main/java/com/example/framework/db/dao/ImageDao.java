@@ -9,6 +9,8 @@ import androidx.room.Query;
 import com.example.framework.db.bean.Image;
 
 import java.util.List;
+import io.reactivex.Completable;
+import io.reactivex.Flowable;
 
 /**
  * @Author: JianTours
@@ -21,11 +23,17 @@ public interface ImageDao {
     @Query("SELECT * FROM image")
     List<Image> getAll();
 
+    /**
+     *这里我增加了一个Flowable和Completable。由于读取速率可能 远大于 观察者处理速率，
+     * 故使用背压 Flowable 模式，这是为了防止表中数据过多，读取速率远大于接收数据，
+     * 从而导致内存溢出的问题，Completable就是操作完成的回调，可以感知操作成功或失败， onComplete和onError。
+     * ————————————————
+     */
     @Query("SELECT * FROM image WHERE id LIKE :id LIMIT 1")
-    Image queryBannerId(int id);
+    Flowable<Image> queryBannerId(int id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(Image... images);
+    Completable insertAll(Image... images);
 
     @Delete
     void delete(Image image);

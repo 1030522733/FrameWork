@@ -1,4 +1,4 @@
-package com.example.framework.vm;
+package com.example.framework.repository;
 
 import android.annotation.SuppressLint;
 import android.provider.SyncStateContract;
@@ -19,6 +19,9 @@ import com.example.framework.utils.MVUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.Flowable;
+
 /**
  * @Author: JianTours
  * @Data: 2021/12/21 20:02
@@ -37,8 +40,13 @@ public class MainRepository {
         MVUtils.put(Constant.REQUEST_TIMESTAMP, DateUtil.getMillisNextEarlyMorning());
         BannerBean.DataBean bean = bannerBean.getData().get(0);
         //保存到数据库
-        new Thread(()-> App.getDb().imageDao().insertAll(
-                new Image(1,bean.getImagePath(),bean.getTitle(),bean.getUrl()))).start();
+        //线程方式
+//        new Thread(()-> App.getDb().imageDao().insertAll(
+//                new Image(1,bean.getImagePath(),bean.getTitle(),bean.getUrl()))).start();
+        Completable insert = App.getDb().imageDao().insertAll(new Image(
+                1,bean.getImagePath(),bean.getTitle(),bean.getUrl()));
+        //使用Rxjava处理数据库
+        CustomDisposable.addDisposable(insert,()->LogUtils.d("插入数据成功"));
     }
 
     /**
@@ -68,8 +76,20 @@ public class MainRepository {
     private void getLocalDB(){
         LogUtils.d("从本地获取");
         BannerBean bannerBean = new BannerBean();
-        new Thread(()->{
-            Image image = App.getDb().imageDao().queryBannerId(1);
+//        new Thread(()->{
+//            Image image = App.getDb().imageDao().queryBannerId(1);
+//            BannerBean.DataBean bean = new BannerBean.DataBean();
+//            bean.setImagePath(image.getImagePath());
+//            bean.setTitle(image.getTitle());
+//            bean.setUrl(image.getUrl());
+//            List<BannerBean.DataBean> dataBeanList = new ArrayList<>();
+//            dataBeanList.add(bean);
+//            bannerBean.setData(dataBeanList);
+//            bannerImage.postValue(bannerBean);
+//        }).start();
+        Flowable<Image> imageFlowable = App.getDb().imageDao().queryBannerId(1);
+        //使用Rxjava处理Room数据
+        CustomDisposable.addDisposable(imageFlowable,image -> {
             BannerBean.DataBean bean = new BannerBean.DataBean();
             bean.setImagePath(image.getImagePath());
             bean.setTitle(image.getTitle());
@@ -78,7 +98,7 @@ public class MainRepository {
             dataBeanList.add(bean);
             bannerBean.setData(dataBeanList);
             bannerImage.postValue(bannerBean);
-        }).start();
+        });
     }
 
     public MutableLiveData<BannerBean> getBanner() {

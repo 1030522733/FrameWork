@@ -39,7 +39,7 @@ public class App extends Application {
         //工具类初始化
         MVUtils.getInstance();
         //创建本地数据库
-        db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "mmvv_demo").build();
+        db = AppDatabase.getInstance(this);
     }
 
     public static AppDatabase getDb() {
