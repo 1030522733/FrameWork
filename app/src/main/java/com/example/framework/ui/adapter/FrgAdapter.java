@@ -21,7 +21,7 @@ import com.example.framework.ui.frg.SystemFrg;
  */
 public class FrgAdapter extends FragmentPagerAdapter {
 
-    private final int PAGER_COUNT = 4;
+    private final int PAGE_COUNT = 4;
     private HomeFrg homeFrg = null;
     private SquareFrg squareFrg = null;
     private SystemFrg systemFrg = null;
@@ -65,6 +65,6 @@ public class FrgAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return PAGER_COUNT;
+        return PAGE_COUNT;
     }
 }
