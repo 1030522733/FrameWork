@@ -17,6 +17,11 @@ public class SystemFrg extends BaseFrg<StartVM, FrgSystemBinding> {
     }
 
     @Override
+    protected void init() {
+
+    }
+
+    @Override
     protected void runFlow() {
 
     }

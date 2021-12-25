@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">MVVM</string>
+
+    <!--首页-->
+    <string name="description">description</string>
+    <string name="Home">首页</string>
+    <string name="Play">玩Android</string>
+    <string name="Square">广场</string>
+    <string name="System">体系</string>
+    <string name="Project">项目</string>
 </resources>

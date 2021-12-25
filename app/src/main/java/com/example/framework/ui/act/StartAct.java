@@ -20,6 +20,10 @@ public class StartAct extends BaseAct<StartVM, ActStartBinding> {
     }
 
     @Override
+    protected void init() {
+    }
+
+    @Override
     protected void runFlow() {
         mViewModel.getBanner();
         mViewModel.mutableLiveData.observe(this, BannerBean -> binding.setViewModel(mViewModel));

@@ -17,6 +17,11 @@ public class HomeFrg extends BaseFrg<StartVM, FrgHomeBinding> {
     }
 
     @Override
+    protected void init() {
+
+    }
+
+    @Override
     protected void runFlow() {
     }
 }

@@ -17,6 +17,11 @@ public class ProjectFrg extends BaseFrg<StartVM, FrgProjectBinding> {
     }
 
     @Override
+    protected void init() {
+
+    }
+
+    @Override
     protected void runFlow() {
 
     }

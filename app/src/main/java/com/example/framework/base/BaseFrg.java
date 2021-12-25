@@ -35,6 +35,11 @@ public abstract class BaseFrg<VM extends BaseVM, VDB extends ViewDataBinding> ex
     protected abstract int getLayoutId();
 
     /**
+     * 初始化
+     */
+    protected abstract void init();
+
+    /**
      *具体业务
      */
     protected abstract void runFlow();

@@ -17,6 +17,11 @@ public class SquareFrg extends BaseFrg<StartVM, FrgSquareBinding> {
     }
 
     @Override
+    protected void init() {
+
+    }
+
+    @Override
     protected void runFlow() {
 
     }

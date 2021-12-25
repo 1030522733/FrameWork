@@ -25,31 +25,39 @@ public abstract class BaseAct<VM extends BaseVM, VDB extends ViewDataBinding>
         extends AppCompatActivity {
 
     /**
-    *上下文
-    */
+     * 上下文
+     */
     public Context mContext;
     protected VM mViewModel;
     protected VDB binding;
 
     /**
-    *获取activity文件，初始化binding
-    */
+     * 获取activity文件，初始化binding
+     */
     protected abstract int getContentViewId();
 
     /**
-    *具体业务
-    */
+     * 初始化
+     */
+    protected abstract void init();
+
+
+    /**
+     * 具体业务
+     */
     protected abstract void runFlow();
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
         setContentView(getContentViewId());
-        binding = DataBindingUtil.setContentView(this,getContentViewId());
+        binding = DataBindingUtil.setContentView(this, getContentViewId());
         binding.setLifecycleOwner(this);
         setStatusBar();
         createViewModel();
+        init();
         runFlow();
     }
 
@@ -69,12 +77,13 @@ public abstract class BaseAct<VM extends BaseVM, VDB extends ViewDataBinding>
     }
 
     /**
-    *沉浸式状态栏
-    */
-    protected void setStatusBar(){
-        if (Build.VERSION.SDK_INT >= 21){
+     * 沉浸式状态栏
+     */
+    protected void setStatusBar() {
+        if (Build.VERSION.SDK_INT >= 21) {
             View view = getWindow().getDecorView();
-            int option = View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            //View.SYSTEM_UI_FLAG_FULLSCREEN 属性会让手机状态栏自动进入隐藏状态
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
             view.setSystemUiVisibility(option);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
