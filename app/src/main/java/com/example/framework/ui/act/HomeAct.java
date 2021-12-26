@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.view.GravityCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.framework.R;
@@ -93,6 +94,11 @@ public class HomeAct extends BaseAct<StartVM, ActHomeBinding> {
             assert tab != null;
             tab.setCustomView(setTabView(App.getContext(), i));
         }
+
+        //Navigation
+        ivToolbar.setOnClickListener(view -> {
+            binding.drawerLayout.openDrawer(GravityCompat.START);
+        });
     }
 
     /**

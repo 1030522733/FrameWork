@@ -5,10 +5,13 @@
         <item name="colorPrimary">@color/themeColor</item>
         <item name="colorPrimaryDark">@color/themeColor</item>
         <item name="colorAccent">@color/themeColor</item>
+        <!--黑白屏暂时解决-->
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <style name="ActivityMainTheme" parent="AppTheme">
         <item name="android:windowBackground">@color/themeColor</item>
     </style>
+
 
 </resources>
