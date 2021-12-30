@@ -1,6 +1,7 @@
 package com.example.framework.db.bean;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 /**
@@ -9,11 +10,11 @@ import androidx.room.PrimaryKey;
  * @Description:
  */
 //数据库表名
-@Entity
+@Entity(tableName = "image")
 public class Image {
     //主键
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private int id = 0;
     private String imagePath;
     private String title;
     private String url;

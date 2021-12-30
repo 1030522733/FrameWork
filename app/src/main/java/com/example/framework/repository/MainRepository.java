@@ -43,7 +43,11 @@ public class MainRepository {
         CustomDisposable.addDisposable(deleteAll, () -> {
             List<Image> imageList = new ArrayList<>();
             for (BannerBean.DataBean dataBean : bannerBean.getData()) {
-                imageList.add(new Image(dataBean.getTitle(), dataBean.getImagePath(), dataBean.getUrl()));
+                Image image = new Image();
+                image.setImagePath(dataBean.getImagePath());
+                image.setTitle(dataBean.getTitle());
+                image.setUrl(dataBean.getUrl());
+                imageList.add(image);
             }
             //保存到数据库
             Completable insertAll = App.getDb().imageDao().insertAll(imageList);
@@ -80,11 +84,12 @@ public class MainRepository {
     private void getLocalDB() {
         LogUtils.d("从本地获取");
         BannerBean bannerBean = new BannerBean();
-        BannerBean.DataBean bean = new BannerBean.DataBean();
         List<BannerBean.DataBean> dataBeanList = new ArrayList<>();
         Flowable<List<Image>> listFlowable = App.getDb().imageDao().getAll();
         CustomDisposable.addDisposable(listFlowable, images -> {
             for (Image image : images) {
+                //防止同一个数据多次获取，出现多张banner一样
+                BannerBean.DataBean bean = new BannerBean.DataBean();
                 bean.setUrl(image.getUrl());
                 bean.setImagePath(image.getImagePath());
                 bean.setTitle(image.getTitle());

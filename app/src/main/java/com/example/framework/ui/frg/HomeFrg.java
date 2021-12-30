@@ -1,24 +1,14 @@
 package com.example.framework.ui.frg;
 
-import android.annotation.SuppressLint;
-import android.view.ViewGroup;
-
 import androidx.lifecycle.Observer;
 
 import com.blankj.utilcode.util.LogUtils;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.framework.R;
 import com.example.framework.base.BaseFrg;
 import com.example.framework.databinding.FrgHomeBinding;
 import com.example.framework.model.BannerBean;
+import com.example.framework.ui.adapter.ImageTitleAdapter;
 import com.example.framework.vm.HomeVM;
-import com.example.framework.vm.StartVM;
-import com.youth.banner.Banner;
-import com.youth.banner.adapter.BannerAdapter;
-import com.youth.banner.adapter.BannerImageAdapter;
-import com.youth.banner.holder.BannerImageHolder;
 import com.youth.banner.indicator.CircleIndicator;
 
 import java.util.ArrayList;
@@ -32,7 +22,7 @@ import java.util.List;
 public class HomeFrg extends BaseFrg<HomeVM, FrgHomeBinding> {
 
     /**
-     *banner数据
+     * banner数据
      */
     private List<BannerBean.DataBean> dataBeanList = new ArrayList<>();
 
@@ -50,29 +40,11 @@ public class HomeFrg extends BaseFrg<HomeVM, FrgHomeBinding> {
         getBanner();
     }
 
-    /**
-     *banner加载
-     */
-    public void useBanner(List<BannerBean.DataBean> dataBeanList){
-        binding.bannerHome.setAdapter(new BannerImageAdapter<BannerBean.DataBean>(dataBeanList) {
-            @SuppressLint("CheckResult")
-            @Override
-            public void onBindView(BannerImageHolder holder, BannerBean.DataBean data, int position, int size) {
-                Glide.with(holder.itemView)
-                        .load(data.getImagePath())
-                        .apply(RequestOptions.bitmapTransform(new RoundedCorners(30)))
-                        .into(holder.imageView);
-            }
-        })
-                .isAutoLoop(true)
-                .addBannerLifecycleObserver(this)
-                .setIndicator(new CircleIndicator(getContext()));
-    }
 
     /**
-     *获得banner
+     * 获得banner
      */
-    public void getBanner(){
+    public void getBanner() {
         mViewModel.getBannerHome().observe(this, new Observer<BannerBean>() {
             @Override
             public void onChanged(BannerBean bannerBean) {
@@ -80,5 +52,14 @@ public class HomeFrg extends BaseFrg<HomeVM, FrgHomeBinding> {
                 useBanner(dataBeanList);
             }
         });
+    }
+
+    /**
+     * banner加载
+     */
+    public void useBanner(List<BannerBean.DataBean> dataBeanList) {
+        binding.bannerHome.addBannerLifecycleObserver(this).setAdapter(new ImageTitleAdapter(dataBeanList))
+                .setIndicator(new CircleIndicator(getContext()))
+                .setIndicatorSpace(60);
     }
 }
