@@ -25,9 +25,6 @@ public class StartAct extends BaseAct<StartVM, ActStartBinding> {
 
     @Override
     protected void runFlow() {
-        mViewModel.getBanner();
-        mViewModel.mutableLiveData.observe(this, BannerBean -> binding.setViewModel(mViewModel));
-
         binding.btStart.setOnClickListener(view -> {
             startActivity(new Intent(StartAct.this, HomeAct.class));
         });

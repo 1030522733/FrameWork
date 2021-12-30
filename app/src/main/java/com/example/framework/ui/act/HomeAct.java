@@ -45,7 +45,8 @@ public class HomeAct extends BaseAct<StartVM, ActHomeBinding> {
      * navigationIcons:导航栏图标
      */
     private final int[] title = {R.string.Play, R.string.Square, R.string.System, R.string.Project};
-    private final int[] titleIcons = {R.mipmap.icon_search, R.mipmap.icon_add, R.mipmap.icon_search, R.mipmap.icon_search};
+    private final int[] titleIcons = {R.mipmap.icon_search, R.mipmap.icon_add,
+            R.mipmap.icon_search, R.mipmap.icon_search};
     private final int[] navigation = {R.string.Home, R.string.Square, R.string.System, R.string.Project};
     private final int[] navigationIcons = {R.drawable.selector_tab_home, R.drawable.selector_tab_square,
             R.drawable.selector_tab_system, R.drawable.selector_tab_project};

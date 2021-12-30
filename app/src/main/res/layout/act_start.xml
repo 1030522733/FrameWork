@@ -5,9 +5,6 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.example.framework.vm.StartVM" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,13 +12,6 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         tools:context=".ui.act.StartAct">
-
-        <com.example.framework.ui.vv.CustomImageView
-            android:id="@+id/img_start"
-            networkUrl="@{viewModel.mutableLiveData.data.get(0).imagePath}"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btStart"

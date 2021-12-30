@@ -1,7 +1,6 @@
 package com.example.framework.repository;
 
 import android.annotation.SuppressLint;
-import android.provider.SyncStateContract;
 
 import androidx.lifecycle.MutableLiveData;
 
@@ -30,23 +29,28 @@ import io.reactivex.Flowable;
 public class MainRepository {
 
     final MutableLiveData<BannerBean> bannerImage = new MutableLiveData<>();
+
     /**
-     *保存数据
+     * 保存数据
      */
-    private void saveImageData(BannerBean bannerBean){
+    private void saveImageData(BannerBean bannerBean) {
         //记录今日请求
-        MVUtils.put(Constant.IS_TODAY_REQUEST,true);
+        MVUtils.put(Constant.IS_TODAY_REQUEST, true);
         //记录时间戳
         MVUtils.put(Constant.REQUEST_TIMESTAMP, DateUtil.getMillisNextEarlyMorning());
-        BannerBean.DataBean bean = bannerBean.getData().get(0);
-        //保存到数据库
-        //线程方式
-//        new Thread(()-> App.getDb().imageDao().insertAll(
-//                new Image(1,bean.getImagePath(),bean.getTitle(),bean.getUrl()))).start();
-        Completable insert = App.getDb().imageDao().insertAll(new Image(
-                1,bean.getImagePath(),bean.getTitle(),bean.getUrl()));
-        //使用Rxjava处理数据库
-        CustomDisposable.addDisposable(insert,()->LogUtils.d("插入数据成功"));
+
+        Completable deleteAll = App.getDb().imageDao().deleteAll();
+        CustomDisposable.addDisposable(deleteAll, () -> {
+            List<Image> imageList = new ArrayList<>();
+            for (BannerBean.DataBean dataBean : bannerBean.getData()) {
+                imageList.add(new Image(dataBean.getTitle(), dataBean.getImagePath(), dataBean.getUrl()));
+            }
+            //保存到数据库
+            Completable insertAll = App.getDb().imageDao().insertAll(imageList);
+            LogUtils.d("插入数据" + imageList.size() + "条");
+            //RxJava处理Room数据存储
+            CustomDisposable.addDisposable(insertAll, () -> LogUtils.d("数据保存成功"));
+        });
     }
 
     /**
@@ -71,40 +75,31 @@ public class MainRepository {
     }
 
     /**
-     *从本地数据库获取
+     * 从本地数据库获取数据
      */
-    private void getLocalDB(){
+    private void getLocalDB() {
         LogUtils.d("从本地获取");
         BannerBean bannerBean = new BannerBean();
-//        new Thread(()->{
-//            Image image = App.getDb().imageDao().queryBannerId(1);
-//            BannerBean.DataBean bean = new BannerBean.DataBean();
-//            bean.setImagePath(image.getImagePath());
-//            bean.setTitle(image.getTitle());
-//            bean.setUrl(image.getUrl());
-//            List<BannerBean.DataBean> dataBeanList = new ArrayList<>();
-//            dataBeanList.add(bean);
-//            bannerBean.setData(dataBeanList);
-//            bannerImage.postValue(bannerBean);
-//        }).start();
-        Flowable<Image> imageFlowable = App.getDb().imageDao().queryBannerId(1);
-        //使用Rxjava处理Room数据
-        CustomDisposable.addDisposable(imageFlowable,image -> {
-            BannerBean.DataBean bean = new BannerBean.DataBean();
-            bean.setImagePath(image.getImagePath());
-            bean.setTitle(image.getTitle());
-            bean.setUrl(image.getUrl());
-            List<BannerBean.DataBean> dataBeanList = new ArrayList<>();
-            dataBeanList.add(bean);
+        BannerBean.DataBean bean = new BannerBean.DataBean();
+        List<BannerBean.DataBean> dataBeanList = new ArrayList<>();
+        Flowable<List<Image>> listFlowable = App.getDb().imageDao().getAll();
+        CustomDisposable.addDisposable(listFlowable, images -> {
+            for (Image image : images) {
+                bean.setUrl(image.getUrl());
+                bean.setImagePath(image.getImagePath());
+                bean.setTitle(image.getTitle());
+                dataBeanList.add(bean);
+            }
             bannerBean.setData(dataBeanList);
-            bannerImage.postValue(bannerBean);
+            bannerImage.setValue(bannerBean);
         });
     }
+
 
     public MutableLiveData<BannerBean> getBanner() {
         //今日此接口是否已请求
         if (MVUtils.getBoolean(Constant.IS_TODAY_REQUEST)) {
-            if(DateUtil.getTimestamp() <= MVUtils.getLong(Constant.REQUEST_TIMESTAMP)){
+            if (DateUtil.getTimestamp() <= MVUtils.getLong(Constant.REQUEST_TIMESTAMP)) {
                 //当前时间未超过次日0点，从本地获取
                 getLocalDB();
             } else {
@@ -117,6 +112,4 @@ public class MainRepository {
         }
         return bannerImage;
     }
-
-
 }

@@ -42,4 +42,5 @@ public class CustomDisposable {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(action));
     }
+
 }

@@ -1,7 +1,6 @@
 package com.example.framework.db.bean;
 
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 /**
@@ -13,7 +12,7 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Image {
     //主键
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
     private String imagePath;
     private String title;
@@ -54,12 +53,9 @@ public class Image {
     public Image() {
     }
 
-    //忽略这个构造方法
-    @Ignore
-    public Image(int id, String imagePath, String title, String url) {
-        this.id = id;
-        this.imagePath = imagePath;
+    public Image(String title,String imagePath, String url) {
         this.title = title;
+        this.imagePath = imagePath;
         this.url = url;
     }
 }
