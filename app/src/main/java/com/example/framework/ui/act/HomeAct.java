@@ -1,6 +1,7 @@
 package com.example.framework.ui.act;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import com.example.framework.base.BaseAct;
 import com.example.framework.databinding.ActHomeBinding;
 import com.example.framework.ui.adapter.FrgAdapter;
 import com.example.framework.vm.StartVM;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 /**
@@ -51,6 +53,12 @@ public class HomeAct extends BaseAct<StartVM, ActHomeBinding> {
     private final int[] navigationIcons = {R.drawable.selector_tab_home, R.drawable.selector_tab_square,
             R.drawable.selector_tab_system, R.drawable.selector_tab_project};
 
+    /**
+     *头部NavigationVIew
+     */
+    private View headerLayout;
+    private ImageView ivRanking;
+
     @Override
     protected int getContentViewId() {
         return R.layout.act_home;
@@ -64,6 +72,8 @@ public class HomeAct extends BaseAct<StartVM, ActHomeBinding> {
         ivHomeFunction = (ImageView) findViewById(R.id.iv_home_function);
         tvToolbar.setText(title[0]);
         ivHomeFunction.setImageResource(titleIcons[0]);
+        headerLayout = (View) binding.navHome.inflateHeaderView(R.layout.nav_header);
+        ivRanking = (ImageView) headerLayout.findViewById(R.id.iv_ranking);
     }
 
     @Override
@@ -99,6 +109,10 @@ public class HomeAct extends BaseAct<StartVM, ActHomeBinding> {
         //Navigation
         ivToolbar.setOnClickListener(view -> {
             binding.drawerLayout.openDrawer(GravityCompat.START);
+        });
+
+        ivRanking.setOnClickListener(view -> {
+            startActivity(new Intent(HomeAct.this,RankingAct.class));
         });
     }
 

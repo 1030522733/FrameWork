@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.act.HomeAct" />
+        <activity android:name=".ui.act.RankingAct" />
     </application>
 
 </manifest>

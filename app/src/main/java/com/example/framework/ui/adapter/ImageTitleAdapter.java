@@ -37,6 +37,5 @@ public class ImageTitleAdapter extends BannerAdapter<BannerBean.DataBean, ImageT
                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(30)))
                 .into(holder.imageView);
         holder.title.setText(data.getTitle());
-
     }
 }

@@ -54,6 +54,7 @@ public class Image {
     public Image() {
     }
 
+    @Ignore
     public Image(String title,String imagePath, String url) {
         this.title = title;
         this.imagePath = imagePath;
