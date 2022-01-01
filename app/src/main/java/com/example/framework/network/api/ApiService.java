@@ -1,6 +1,7 @@
 package com.example.framework.network.api;
 
 import com.example.framework.model.BannerBean;
+import com.example.framework.model.RankingBean;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -16,4 +17,10 @@ public interface ApiService {
      */
     @GET("/banner/json")
     Observable<BannerBean> getBanner();
+
+    /**
+     * 积分排行
+     */
+    @GET("coin/rank/1/json")
+    Observable<RankingBean> getRanking();
 }

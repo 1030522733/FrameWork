@@ -85,4 +85,7 @@ dependencies {
 
     //BaseQuickAdapter
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.1'
+
+    //加载动画
+    implementation 'com.wang.avi:library:2.1.3'
 }

@@ -15,13 +15,17 @@ import java.util.List;
  * @Data: 2021/12/31 22:14
  * @Description:
  */
-public class RankingAdapter extends BaseQuickAdapter<RankingBean.DataBean, BaseViewHolder> {
-    public RankingAdapter(int layoutResId, @Nullable List<RankingBean.DataBean> data) {
+public class RankingAdapter extends BaseQuickAdapter<RankingBean.DataBean.DatasBean, BaseViewHolder> {
+
+
+    public RankingAdapter(@Nullable List<RankingBean.DataBean.DatasBean> data) {
         super(R.layout.rv_ranking, data);
     }
 
     @Override
-    protected void convert(@NonNull BaseViewHolder baseViewHolder, RankingBean.DataBean dataBean) {
 
+    protected void convert(@NonNull BaseViewHolder baseViewHolder, RankingBean.DataBean.DatasBean datasBean) {
+        baseViewHolder.setText(R.id.tv_rv_ranking_name, datasBean.getUsername());
+        baseViewHolder.setText(R.id.tv_rv_ranking_score, "" + datasBean.getCoinCount());
     }
 }
