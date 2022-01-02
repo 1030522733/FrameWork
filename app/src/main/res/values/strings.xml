@@ -9,5 +9,10 @@
     <string name="System">体系</string>
     <string name="Project">项目</string>
 
+<!--    登录页-->
     <string name="loginTitle">请使用WanAndroid账号登录!</string>
+    <string name="username">账号</string>
+    <string name="password">密码</string>
+    <string name="login">登录</string>
+    <string name="register">注册</string>
 </resources>

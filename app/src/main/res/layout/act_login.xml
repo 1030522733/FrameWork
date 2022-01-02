@@ -30,7 +30,7 @@
             android:id="@+id/iv_login_username"
             android:layout_width="25dp"
             android:layout_height="18dp"
-            android:layout_marginLeft="50dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="30dp"
             android:src="@mipmap/icon_username"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -40,7 +40,7 @@
             android:id="@+id/tv_login_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="账号"
+            android:text="@string/username"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@id/iv_login_username"
@@ -49,15 +49,15 @@
 
         <EditText
             android:id="@+id/et_login_username"
-            android:layout_width="210dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
             android:layout_marginTop="20dp"
-            android:background="@null"
+            android:background="@drawable/shape_bg_input"
             android:hint="请输入账号"
             android:textColor="@color/black"
             android:textSize="16sp"
-            app:layout_constraintLeft_toLeftOf="@id/tv_login_username"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_login_username" />
 
 
@@ -75,7 +75,7 @@
             android:id="@+id/tv_login_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="密码"
+            android:text="@string/password"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@id/iv_login_password"
@@ -84,30 +84,54 @@
 
         <EditText
             android:id="@+id/et_login_password"
-            android:layout_width="210dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_width="260dp"
+            android:layout_height="40dp"
             android:layout_marginTop="20dp"
-            android:background="@null"
+            android:background="@drawable/shape_bg_input"
             android:hint="请输入密码"
             android:textColor="@color/black"
             android:textSize="16sp"
-            app:layout_constraintLeft_toLeftOf="@id/tv_login_username"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_login_password" />
 
+        <Button
+            android:id="@+id/bt_login"
+            android:layout_width="260dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/shape_bg_button_white"
+            android:text="@string/login"
+            android:textColor="@color/themeColor"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_login_password" />
 
-        <!--        <Button-->
-        <!--            android:id="@+id/bt_login"-->
-        <!--            android:layout_width="327dp"-->
-        <!--            android:layout_height="52dp"-->
-        <!--            android:layout_marginTop="80dp"-->
-        <!--            android:background="@drawable/shape_bg_radius_bt"-->
-        <!--            android:text="登录"-->
-        <!--            android:textColor="@color/white"-->
-        <!--            android:textSize="15sp"-->
-        <!--            app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--            app:layout_constraintRight_toRightOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/et_login_verify" />-->
+        <Button
+            android:id="@+id/bt_register"
+            android:layout_width="260dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_bg_button_white"
+            android:text="@string/register"
+            android:textColor="@color/themeColor"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bt_login" />
+
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/avi_login"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:indicatorColor="@color/white"
+            app:indicatorName="LineScalePulseOutRapidIndicator"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

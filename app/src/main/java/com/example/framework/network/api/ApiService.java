@@ -1,10 +1,13 @@
 package com.example.framework.network.api;
 
 import com.example.framework.model.BannerBean;
+import com.example.framework.model.LoginBean;
 import com.example.framework.model.RankingBean;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 /**
  * @Author: JianTours
@@ -23,4 +26,11 @@ public interface ApiService {
      */
     @GET("coin/rank/1/json")
     Observable<RankingBean> getRanking();
+
+    /**
+     *登录
+     */
+    @POST("user/login")
+    Observable<LoginBean> Login(@Query("username") String username,
+                                @Query("password") String password);
 }
