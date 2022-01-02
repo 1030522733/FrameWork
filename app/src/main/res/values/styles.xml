@@ -10,7 +10,7 @@
     </style>
 
     <style name="ActivityMainTheme" parent="AppTheme">
-        <item name="android:windowBackground">@color/themeColor</item>
+        <item name="android:windowBackground">@color/white</item>
     </style>
 
 

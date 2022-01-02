@@ -29,7 +29,6 @@ public class RankingAct extends BaseAct<RankingVM, ActRankingBinding> {
      */
     private ImageView ivToolbar;
     private TextView tvToolbar;
-    private ImageView ivHomeFunction;
 
     /**
      * recyclerview
@@ -47,10 +46,10 @@ public class RankingAct extends BaseAct<RankingVM, ActRankingBinding> {
     @Override
     protected void init() {
         ConstraintLayout toolbar = (ConstraintLayout) binding.toolbarRanking;
-        ivToolbar = (ImageView) findViewById(R.id.iv_home_menu);
-        tvToolbar = (TextView) findViewById(R.id.tv_home_toolbar);
-        ivHomeFunction = (ImageView) findViewById(R.id.iv_home_function);
+        ivToolbar = (ImageView) findViewById(R.id.iv_custom_toolbar);
+        tvToolbar = (TextView) findViewById(R.id.tv_custom_toolbar);
         tvToolbar.setText("积分排行榜");
+        ivToolbar.setImageResource(R.mipmap.icon_back);
     }
 
     @Override
@@ -61,6 +60,9 @@ public class RankingAct extends BaseAct<RankingVM, ActRankingBinding> {
         binding.rvRanking.setLayoutManager(linearLayoutManager);
         binding.rvRanking.setAdapter(rankingAdapter);
         getRanking();
+        ivToolbar.setOnClickListener(view -> {
+            finish();
+        });
     }
 
     /**

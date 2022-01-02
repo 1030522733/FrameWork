@@ -11,13 +11,13 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.R;
 import com.example.framework.base.App;
 import com.example.framework.base.BaseAct;
 import com.example.framework.databinding.ActHomeBinding;
 import com.example.framework.ui.adapter.FrgAdapter;
 import com.example.framework.vm.StartVM;
-import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 /**
@@ -53,11 +53,8 @@ public class HomeAct extends BaseAct<StartVM, ActHomeBinding> {
     private final int[] navigationIcons = {R.drawable.selector_tab_home, R.drawable.selector_tab_square,
             R.drawable.selector_tab_system, R.drawable.selector_tab_project};
 
-    /**
-     *头部NavigationVIew
-     */
-    private View headerLayout;
     private ImageView ivRanking;
+    private TextView tvLogin;
 
     @Override
     protected int getContentViewId() {
@@ -72,8 +69,14 @@ public class HomeAct extends BaseAct<StartVM, ActHomeBinding> {
         ivHomeFunction = (ImageView) findViewById(R.id.iv_home_function);
         tvToolbar.setText(title[0]);
         ivHomeFunction.setImageResource(titleIcons[0]);
-        headerLayout = (View) binding.navHome.inflateHeaderView(R.layout.nav_header);
+
+        /**
+         *头部NavigationVIew
+         */
+        View headerLayout = (View) binding.navHome.inflateHeaderView(R.layout.nav_header);
         ivRanking = (ImageView) headerLayout.findViewById(R.id.iv_ranking);
+        tvLogin = (TextView) headerLayout.findViewById(R.id.tv_header_login);
+        tvLogin.setText("登录");
     }
 
     @Override
@@ -112,7 +115,13 @@ public class HomeAct extends BaseAct<StartVM, ActHomeBinding> {
         });
 
         ivRanking.setOnClickListener(view -> {
-            startActivity(new Intent(HomeAct.this,RankingAct.class));
+            startActivity(new Intent(HomeAct.this, RankingAct.class));
+        });
+
+        tvLogin.setOnClickListener(view -> {
+            if (tvLogin.getText().toString().equals("登录")) {
+                startActivity(new Intent(HomeAct.this,LoginAct.class));
+            }
         });
     }
 

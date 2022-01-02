@@ -25,6 +25,7 @@ public class RankingAdapter extends BaseQuickAdapter<RankingBean.DataBean.DatasB
     @Override
 
     protected void convert(@NonNull BaseViewHolder baseViewHolder, RankingBean.DataBean.DatasBean datasBean) {
+        baseViewHolder.setText(R.id.tv_rv_ranking,datasBean.getRank());
         baseViewHolder.setText(R.id.tv_rv_ranking_name, datasBean.getUsername());
         baseViewHolder.setText(R.id.tv_rv_ranking_score, "" + datasBean.getCoinCount());
     }

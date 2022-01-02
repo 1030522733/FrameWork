@@ -5,10 +5,21 @@
     android:layout_height="50dp">
 
     <TextView
+        android:id="@+id/tv_rv_ranking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:textSize="16sp"
+        android:textColor="@color/gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
         android:id="@+id/tv_rv_ranking_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="60dp"
         android:text="测试"
         android:textColor="@color/black"
         android:textSize="15sp"
@@ -20,8 +31,8 @@
         android:id="@+id/tv_rv_ranking_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="30dp"
-        android:textColor="@color/black"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/themeColor"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"

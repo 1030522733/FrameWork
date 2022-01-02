@@ -1,7 +1,6 @@
 package com.example.framework.base;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -85,7 +84,8 @@ public abstract class BaseAct<VM extends BaseVM, VDB extends ViewDataBinding>
             //View.SYSTEM_UI_FLAG_FULLSCREEN 属性会让手机状态栏自动进入隐藏状态
             int option = View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
             view.setSystemUiVisibility(option);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
+            //状态栏透明
+//            getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();

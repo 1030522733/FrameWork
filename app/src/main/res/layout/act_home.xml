@@ -18,7 +18,7 @@
 
             <include
                 android:id="@+id/toolbar_home"
-                layout="@layout/toolbar_custom" />
+                layout="@layout/toolbar_home" />
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/vp_home"
