@@ -2,17 +2,22 @@ package com.example.framework.ui.act;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 
 import com.example.framework.R;
+import com.example.framework.base.App;
 import com.example.framework.base.BaseAct;
 import com.example.framework.databinding.ActLoginBinding;
 import com.example.framework.model.LoginBean;
 import com.example.framework.vm.LoginVM;
+
+import es.dmoral.toasty.Toasty;
 
 /**
  * @Author: JianTours
@@ -50,11 +55,14 @@ public class LoginAct extends BaseAct<LoginVM, ActLoginBinding> {
         });
 
         binding.btLogin.setOnClickListener(view -> {
-            binding.aviLogin.show();
-            banClick();
             username = binding.etLoginUsername.getText().toString();
             password = binding.etLoginPassword.getText().toString();
-            Login(username, password);
+            if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
+                Toasty.normal(this, "账号或密码不能为空!", Toast.LENGTH_SHORT).show();
+            } else {
+                Login(username, password);
+                binding.aviLogin.show();
+            }
         });
     }
 
@@ -66,7 +74,6 @@ public class LoginAct extends BaseAct<LoginVM, ActLoginBinding> {
             @Override
             public void onChanged(LoginBean loginBean) {
                 binding.aviLogin.hide();
-                allowClick();
                 if (loginBean.getData() != null) {
                     //通过sp存储账号密码
                     @SuppressLint("CommitPrefEdits")
@@ -75,15 +82,19 @@ public class LoginAct extends BaseAct<LoginVM, ActLoginBinding> {
                     editor.putString("password", loginBean.getData().getPassword());
                     editor.putInt("id", loginBean.getData().getId());
                     editor.apply();
+                    Toasty.success(App.getContext(), "登录成功", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toasty.error(App.getContext(), "账号或密码错误", Toast.LENGTH_SHORT, true).show();
                 }
             }
         });
     }
 
     /**
-     *禁止点击
+     * 禁止点击
      */
-    private void banClick(){
+    private void banClick() {
         binding.btLogin.setEnabled(false);
         binding.btRegister.setEnabled(false);
         binding.etLoginUsername.setEnabled(false);
@@ -91,9 +102,9 @@ public class LoginAct extends BaseAct<LoginVM, ActLoginBinding> {
     }
 
     /**
-     *允许点击
+     * 允许点击
      */
-    private void allowClick(){
+    private void allowClick() {
         binding.btLogin.setEnabled(true);
         binding.btRegister.setEnabled(true);
         binding.etLoginUsername.setEnabled(true);

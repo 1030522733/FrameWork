@@ -32,12 +32,12 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         app = this;
-        //网络初始化
-        NetworkApi.init(new FrameWorkNetworkInfo(this));
         //MMKV初始化
         MMKV.initialize(this);
         //工具类初始化
         MVUtils.getInstance();
+        //网络初始化
+        NetworkApi.init(new FrameWorkNetworkInfo(this));
         //创建本地数据库
         db = AppDatabase.getInstance(this);
     }

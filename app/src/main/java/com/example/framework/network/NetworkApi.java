@@ -1,5 +1,8 @@
 package com.example.framework.network;
 
+import android.content.Context;
+
+import com.example.framework.base.App;
 import com.example.framework.network.interptor.RequestInterceptor;
 import com.example.framework.network.interptor.ResponseInterceptor;
 
@@ -37,6 +40,8 @@ public class NetworkApi {
     private static OkHttpClient okHttpClient;
 
     private static final HashMap<String, Retrofit> retrofitHashMap = new HashMap<>();
+
+    private Context context;
 
     /**
      * 初始化

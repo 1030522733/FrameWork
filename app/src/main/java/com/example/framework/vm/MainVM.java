@@ -11,11 +11,18 @@ import com.example.framework.repository.MainRepository;
 
 /**
  * @Author: JianTours
- * @Data: 2021/12/19 20:58
- * @Description: 启动页VM
+ * @Data: 2021/12/29 22:34
+ * @Description: 首页VM
  */
-public class StartVM extends BaseVM {
-    public StartVM(@NonNull Application application) {
+public class MainVM extends BaseVM {
+
+    public MainVM(@NonNull Application application) {
         super(application);
+    }
+
+    public MutableLiveData<BannerBean> getBannerHome(){
+        MutableLiveData<BannerBean> mutableLiveData;
+        mutableLiveData = new MainRepository().getBanner();
+        return mutableLiveData;
     }
 }

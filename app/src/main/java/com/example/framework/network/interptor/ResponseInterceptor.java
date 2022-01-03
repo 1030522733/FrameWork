@@ -1,9 +1,16 @@
 package com.example.framework.network.interptor;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.text.TextUtils;
+
 import com.blankj.utilcode.util.LogUtils;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import okhttp3.Interceptor;
 import okhttp3.Response;
@@ -24,5 +31,4 @@ public class ResponseInterceptor implements Interceptor {
         LogUtils.d(TAG, "requestSpendTime=" + (System.currentTimeMillis() - requestTime) + "ms");
         return response;
     }
-
 }

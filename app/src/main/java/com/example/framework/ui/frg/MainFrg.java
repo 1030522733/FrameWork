@@ -2,13 +2,12 @@ package com.example.framework.ui.frg;
 
 import androidx.lifecycle.Observer;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.R;
 import com.example.framework.base.BaseFrg;
-import com.example.framework.databinding.FrgHomeBinding;
+import com.example.framework.databinding.FrgMainBinding;
 import com.example.framework.model.BannerBean;
 import com.example.framework.ui.adapter.ImageTitleAdapter;
-import com.example.framework.vm.HomeVM;
+import com.example.framework.vm.MainVM;
 import com.youth.banner.indicator.CircleIndicator;
 
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ import java.util.List;
  * @Data: 2021/12/21 23:10
  * @Description:
  */
-public class HomeFrg extends BaseFrg<HomeVM, FrgHomeBinding> {
+public class MainFrg extends BaseFrg<MainVM, FrgMainBinding> {
 
     /**
      * banner数据
@@ -28,7 +27,7 @@ public class HomeFrg extends BaseFrg<HomeVM, FrgHomeBinding> {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.frg_home;
+        return R.layout.frg_main;
     }
 
     @Override

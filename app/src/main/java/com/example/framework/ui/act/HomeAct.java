@@ -1,5 +1,6 @@
 package com.example.framework.ui.act;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
+import androidx.lifecycle.Observer;
 import androidx.viewpager.widget.ViewPager;
 
 import com.blankj.utilcode.util.LogUtils;
@@ -16,8 +18,9 @@ import com.example.framework.R;
 import com.example.framework.base.App;
 import com.example.framework.base.BaseAct;
 import com.example.framework.databinding.ActHomeBinding;
+import com.example.framework.model.IntegralBean;
 import com.example.framework.ui.adapter.FrgAdapter;
-import com.example.framework.vm.StartVM;
+import com.example.framework.vm.HomeVM;
 import com.google.android.material.tabs.TabLayout;
 
 /**
@@ -25,7 +28,7 @@ import com.google.android.material.tabs.TabLayout;
  * @Data: 2021/12/22 21:10
  * @Description:
  */
-public class HomeAct extends BaseAct<StartVM, ActHomeBinding> {
+public class HomeAct extends BaseAct<HomeVM, ActHomeBinding> {
 
     /**
      * 标题栏
@@ -53,8 +56,13 @@ public class HomeAct extends BaseAct<StartVM, ActHomeBinding> {
     private final int[] navigationIcons = {R.drawable.selector_tab_home, R.drawable.selector_tab_square,
             R.drawable.selector_tab_system, R.drawable.selector_tab_project};
 
+    /**
+     * 头部Navigation
+     */
     private ImageView ivRanking;
     private TextView tvLogin;
+    private TextView tvLevel;
+    private TextView tvRanking;
 
     @Override
     protected int getContentViewId() {
@@ -76,15 +84,24 @@ public class HomeAct extends BaseAct<StartVM, ActHomeBinding> {
         View headerLayout = (View) binding.navHome.inflateHeaderView(R.layout.nav_header);
         ivRanking = (ImageView) headerLayout.findViewById(R.id.iv_ranking);
         tvLogin = (TextView) headerLayout.findViewById(R.id.tv_header_login);
-        tvLogin.setText("登录");
-    }
+        tvLevel = (TextView) headerLayout.findViewById(R.id.tv_header_level);
+        tvRanking = (TextView) headerLayout.findViewById(R.id.tv_header_rank);
+        getIntegral();
 
-    @Override
-    protected void runFlow() {
         FrgAdapter frgAdapter = new FrgAdapter(getSupportFragmentManager(), this);
         binding.vpHome.setAdapter(frgAdapter);
         binding.vpHome.setOffscreenPageLimit(1);
         binding.tbHome.setupWithViewPager(binding.vpHome);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getIntegral();
+    }
+
+    @Override
+    protected void runFlow() {
         //滑动监听该表标题栏
         binding.vpHome.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -120,7 +137,7 @@ public class HomeAct extends BaseAct<StartVM, ActHomeBinding> {
 
         tvLogin.setOnClickListener(view -> {
             if (tvLogin.getText().toString().equals("登录")) {
-                startActivity(new Intent(HomeAct.this,LoginAct.class));
+                startActivity(new Intent(HomeAct.this, LoginAct.class));
             }
         });
     }
@@ -136,5 +153,28 @@ public class HomeAct extends BaseAct<StartVM, ActHomeBinding> {
         textView.setTextColor(binding.tbHome.getTabTextColors());
         imageView.setImageResource(navigationIcons[position]);
         return view;
+    }
+
+    /**
+     * 获取个人积分排名
+     */
+    private void getIntegral() {
+        mViewModel.getIntegral().observe(this, new Observer<IntegralBean>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onChanged(IntegralBean integralBean) {
+                if (integralBean.getData() != null) {
+                    tvLogin.setText(integralBean.getData().getUsername());
+                    tvLevel.setText("等级：" + integralBean.getData().getLevel());
+                    tvRanking.setText("排名：" + integralBean.getData().getRank());
+                    LogUtils.d(integralBean.getData().getUsername());
+                }
+                if (integralBean.getErrorCode() == -1001) {
+                    tvLogin.setText("登录");
+                    tvLevel.setText("等级:--");
+                    tvRanking.setText("排名:--");
+                }
+            }
+        });
     }
 }

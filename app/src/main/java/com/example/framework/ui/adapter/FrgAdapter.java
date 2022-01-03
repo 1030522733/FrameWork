@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.framework.ui.act.HomeAct;
-import com.example.framework.ui.frg.HomeFrg;
+import com.example.framework.ui.frg.MainFrg;
 import com.example.framework.ui.frg.ProjectFrg;
 import com.example.framework.ui.frg.SquareFrg;
 import com.example.framework.ui.frg.SystemFrg;
@@ -22,14 +22,14 @@ import com.example.framework.ui.frg.SystemFrg;
 public class FrgAdapter extends FragmentPagerAdapter {
 
     private final int PAGE_COUNT = 4;
-    private HomeFrg homeFrg = null;
+    private MainFrg mainFrg = null;
     private SquareFrg squareFrg = null;
     private SystemFrg systemFrg = null;
     private ProjectFrg projectFrg = null;
 
     public FrgAdapter(@NonNull FragmentManager fm, Context context) {
         super(fm);
-        homeFrg = new HomeFrg();
+        mainFrg = new MainFrg();
         squareFrg = new SquareFrg();
         systemFrg = new SystemFrg();
         projectFrg = new ProjectFrg();
@@ -48,7 +48,7 @@ public class FrgAdapter extends FragmentPagerAdapter {
         Fragment fragment = null;
         switch (position) {
             case HomeAct.PAGE_HOME:
-                fragment = homeFrg;
+                fragment = mainFrg;
                 break;
             case HomeAct.PAGE_SQUARE:
                 fragment = squareFrg;

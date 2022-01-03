@@ -1,6 +1,7 @@
 package com.example.framework.network.api;
 
 import com.example.framework.model.BannerBean;
+import com.example.framework.model.IntegralBean;
 import com.example.framework.model.LoginBean;
 import com.example.framework.model.RankingBean;
 
@@ -33,4 +34,10 @@ public interface ApiService {
     @POST("user/login")
     Observable<LoginBean> Login(@Query("username") String username,
                                 @Query("password") String password);
+
+    /**
+     *获取个人积分
+     */
+    @GET("lg/coin/userinfo/json")
+    Observable<IntegralBean> getIntegral();
 }
