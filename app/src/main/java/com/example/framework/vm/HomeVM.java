@@ -6,6 +6,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.example.framework.base.BaseVM;
 import com.example.framework.model.IntegralBean;
 import com.example.framework.network.BaseObserver;
@@ -30,10 +31,12 @@ public class HomeVM extends BaseVM {
             @Override
             public void onSucceed(IntegralBean integralBean) {
                 mutableLiveData.setValue(integralBean);
+                LogUtils.d("成功");
             }
 
             @Override
             public void onFailure(Throwable e) {
+                LogUtils.d(e);
             }
         }));
         return mutableLiveData;

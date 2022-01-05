@@ -86,7 +86,12 @@ public class HomeAct extends BaseAct<HomeVM, ActHomeBinding> {
         tvLogin = (TextView) headerLayout.findViewById(R.id.tv_header_login);
         tvLevel = (TextView) headerLayout.findViewById(R.id.tv_header_level);
         tvRanking = (TextView) headerLayout.findViewById(R.id.tv_header_rank);
+        tvLogin.setText("登录");
+        tvLevel.setText("等级:--");
+        tvRanking.setText("排名:--");
         getIntegral();
+
+
 
         FrgAdapter frgAdapter = new FrgAdapter(getSupportFragmentManager(), this);
         binding.vpHome.setAdapter(frgAdapter);
@@ -168,8 +173,7 @@ public class HomeAct extends BaseAct<HomeVM, ActHomeBinding> {
                     tvLevel.setText("等级：" + integralBean.getData().getLevel());
                     tvRanking.setText("排名：" + integralBean.getData().getRank());
                     LogUtils.d(integralBean.getData().getUsername());
-                }
-                if (integralBean.getErrorCode() == -1001) {
+                }else {
                     tvLogin.setText("登录");
                     tvLevel.setText("等级:--");
                     tvRanking.setText("排名:--");

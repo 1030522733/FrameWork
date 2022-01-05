@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.example.framework.utils.Constant;
+import com.example.framework.utils.MVUtils;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -13,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 import okhttp3.Interceptor;
+import okhttp3.Request;
 import okhttp3.Response;
 
 /**
@@ -27,7 +30,8 @@ public class ResponseInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         long requestTime = System.currentTimeMillis();
-        Response response = chain.proceed(chain.request());
+        Request request = chain.request();
+        Response response = chain.proceed(request);
         LogUtils.d(TAG, "requestSpendTime=" + (System.currentTimeMillis() - requestTime) + "ms");
         return response;
     }

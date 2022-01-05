@@ -2,9 +2,9 @@ package com.example.framework.network;
 
 import android.content.Context;
 
-import com.example.framework.base.App;
+import com.blankj.utilcode.util.LogUtils;
+import com.example.framework.network.interptor.LoginInterceptor;
 import com.example.framework.network.interptor.RequestInterceptor;
-import com.example.framework.network.interptor.ResponseInterceptor;
 
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
@@ -12,7 +12,6 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.Observer;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -57,6 +56,7 @@ public class NetworkApi {
         return getRetrofit(serviceClass).create(serviceClass);
     }
 
+
     /**
      * 配置okhttp
      */
@@ -71,8 +71,7 @@ public class NetworkApi {
             builder.connectTimeout(6, TimeUnit.SECONDS);
             //添加拦截器
             builder.addInterceptor(new RequestInterceptor(iNetworkRequiredInfo));
-            //返回拦截器
-            builder.addInterceptor(new ResponseInterceptor());
+            builder.addInterceptor(new LoginInterceptor());
             //debug打印日志
             if (iNetworkRequiredInfo != null && iNetworkRequiredInfo.isDebug()) {
                 HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
