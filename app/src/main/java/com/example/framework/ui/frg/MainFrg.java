@@ -1,12 +1,19 @@
 package com.example.framework.ui.frg;
 
+import android.annotation.SuppressLint;
+
 import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.framework.R;
+import com.example.framework.base.App;
 import com.example.framework.base.BaseFrg;
 import com.example.framework.databinding.FrgMainBinding;
+import com.example.framework.model.ArticleBean;
 import com.example.framework.model.BannerBean;
 import com.example.framework.ui.adapter.ImageTitleAdapter;
+import com.example.framework.ui.adapter.MainAdapter;
+import com.example.framework.ui.adapter.RankingAdapter;
 import com.example.framework.vm.MainVM;
 import com.youth.banner.indicator.CircleIndicator;
 
@@ -25,6 +32,12 @@ public class MainFrg extends BaseFrg<MainVM, FrgMainBinding> {
      */
     private List<BannerBean.DataBean> dataBeanList = new ArrayList<>();
 
+    /**
+     * 文章数据
+     */
+    private List<ArticleBean.DataBean.DatasBean> airicleList = new ArrayList<>();
+    private MainAdapter mainAdapter;
+
     @Override
     protected int getLayoutId() {
         return R.layout.frg_main;
@@ -32,11 +45,16 @@ public class MainFrg extends BaseFrg<MainVM, FrgMainBinding> {
 
     @Override
     protected void init() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(App.getContext(), LinearLayoutManager.VERTICAL, false);
+        mainAdapter = new MainAdapter(airicleList);
+        binding.rvMain.setLayoutManager(linearLayoutManager);
+        binding.rvMain.setAdapter(mainAdapter);
     }
 
     @Override
     protected void runFlow() {
         getBanner();
+        getMainArticle();
     }
 
 
@@ -57,8 +75,20 @@ public class MainFrg extends BaseFrg<MainVM, FrgMainBinding> {
      * banner加载
      */
     public void useBanner(List<BannerBean.DataBean> dataBeanList) {
-        binding.bannerHome.addBannerLifecycleObserver(this).setAdapter(new ImageTitleAdapter(dataBeanList))
+        binding.bannerMain.addBannerLifecycleObserver(this).setAdapter(new ImageTitleAdapter(dataBeanList))
                 .setIndicator(new CircleIndicator(getContext()))
                 .setIndicatorSpace(60);
+    }
+
+    public void getMainArticle(){
+        mViewModel.getMainArticle().observe(this, new Observer<ArticleBean>() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onChanged(ArticleBean articleBean) {
+                airicleList.clear();
+                airicleList.addAll(articleBean.getData().getDatas());
+                mainAdapter.notifyDataSetChanged();
+            }
+        });
     }
 }

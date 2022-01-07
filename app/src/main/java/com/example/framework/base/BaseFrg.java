@@ -55,6 +55,7 @@ public abstract class BaseFrg<VM extends BaseVM, VDB extends ViewDataBinding> ex
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        init();
         runFlow();
     }
 

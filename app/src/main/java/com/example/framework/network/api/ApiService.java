@@ -1,5 +1,6 @@
 package com.example.framework.network.api;
 
+import com.example.framework.model.ArticleBean;
 import com.example.framework.model.BannerBean;
 import com.example.framework.model.IntegralBean;
 import com.example.framework.model.LoginBean;
@@ -40,4 +41,10 @@ public interface ApiService {
      */
     @GET("lg/coin/userinfo/json")
     Observable<IntegralBean> getIntegral();
+
+    /**
+     * 首页文章
+     */
+    @GET("article/list/0/json")
+    Observable<ArticleBean> getMainArticle();
 }
