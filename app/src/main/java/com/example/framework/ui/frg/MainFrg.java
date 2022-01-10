@@ -1,21 +1,27 @@
 package com.example.framework.ui.frg;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.view.View;
 
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.blankj.utilcode.util.LogUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.framework.R;
 import com.example.framework.base.App;
 import com.example.framework.base.BaseFrg;
 import com.example.framework.databinding.FrgMainBinding;
 import com.example.framework.model.ArticleBean;
 import com.example.framework.model.BannerBean;
+import com.example.framework.ui.act.DetailsAct;
 import com.example.framework.ui.adapter.ImageTitleAdapter;
 import com.example.framework.ui.adapter.MainAdapter;
 import com.example.framework.ui.adapter.RankingAdapter;
 import com.example.framework.vm.MainVM;
 import com.youth.banner.indicator.CircleIndicator;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +61,22 @@ public class MainFrg extends BaseFrg<MainVM, FrgMainBinding> {
     protected void runFlow() {
         getBanner();
         getMainArticle();
+
+        mainAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                ArticleBean.DataBean.DatasBean bean = (ArticleBean.DataBean.DatasBean) adapter.getItem(position);
+                Intent intent = new Intent(App.getContext(),DetailsAct.class);
+                switch (view.getId()){
+                    case R.id.tv_rv_main_title:
+                        intent.putExtra("url",bean.getLink());
+                        LogUtils.d(bean.getLink());
+                        startActivity(intent);
+                        break;
+                }
+            }
+        });
+
     }
 
 

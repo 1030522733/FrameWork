@@ -25,6 +25,7 @@
         <activity android:name=".ui.act.HomeAct" />
         <activity android:name=".ui.act.RankingAct" />
         <activity android:name=".ui.act.LoginAct" />
+        <activity android:name=".ui.act.DetailsAct" />
     </application>
 
 </manifest>

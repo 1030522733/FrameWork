@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.framework.R;
 import com.example.framework.model.RankingBean;
 
@@ -23,10 +23,10 @@ public class RankingAdapter extends BaseQuickAdapter<RankingBean.DataBean.DatasB
     }
 
     @Override
-
-    protected void convert(@NonNull BaseViewHolder baseViewHolder, RankingBean.DataBean.DatasBean datasBean) {
-        baseViewHolder.setText(R.id.tv_rv_ranking,datasBean.getRank());
-        baseViewHolder.setText(R.id.tv_rv_ranking_name, datasBean.getUsername());
-        baseViewHolder.setText(R.id.tv_rv_ranking_score, "" + datasBean.getCoinCount());
+    protected void convert(@NonNull BaseViewHolder helper, RankingBean.DataBean.DatasBean item) {
+        helper.setText(R.id.tv_rv_ranking, item.getRank());
+        helper.setText(R.id.tv_rv_ranking_name, item.getUsername());
+        helper.setText(R.id.tv_rv_ranking_score, "" + item.getCoinCount());
     }
+
 }

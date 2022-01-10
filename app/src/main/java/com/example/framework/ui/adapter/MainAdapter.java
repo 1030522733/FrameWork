@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.framework.R;
 import com.example.framework.model.ArticleBean;
 
@@ -22,7 +22,9 @@ public class MainAdapter extends BaseQuickAdapter<ArticleBean.DataBean.DatasBean
     }
 
     @Override
-    protected void convert(@NonNull BaseViewHolder baseViewHolder, ArticleBean.DataBean.DatasBean datasBean) {
-        baseViewHolder.setText(R.id.tv_rv_main_title,datasBean.getTitle());
+    protected void convert(@NonNull BaseViewHolder helper, ArticleBean.DataBean.DatasBean item) {
+        helper.setText(R.id.tv_rv_main_title,item.getTitle());
+        helper.addOnClickListener(R.id.tv_rv_main_title);
     }
+
 }
