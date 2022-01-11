@@ -91,4 +91,7 @@ dependencies {
 
     //精致Toast
     implementation 'com.github.GrenderG:Toasty:1.5.2'
+
+    //启动页
+    implementation 'me.wangyuwei:ParticleView:1.0.4'
 }

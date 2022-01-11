@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android Project/Person/FrameWork/app/src/main/res/drawable/layer_home.xml" value="0.19537037037037036" />
+        <entry key="..\:/Android Project/Person/FrameWork/app/src/main/res/drawable/progress_style.xml" value="0.14947916666666666" />
         <entry key="..\:/Android Project/Person/FrameWork/app/src/main/res/drawable/selector_tab_home.xml" value="0.21875" />
         <entry key="..\:/Android Project/Person/FrameWork/app/src/main/res/drawable/selector_tab_project.xml" value="0.19479166666666667" />
         <entry key="..\:/Android Project/Person/FrameWork/app/src/main/res/drawable/selector_tab_square.xml" value="0.17552083333333332" />
@@ -24,7 +25,9 @@
         <entry key="..\:/Android Project/Person/FrameWork/app/src/main/res/layout/frg_square.xml" value="0.1953125" />
         <entry key="..\:/Android Project/Person/FrameWork/app/src/main/res/layout/frg_system.xml" value="0.1953125" />
         <entry key="..\:/Android Project/Person/FrameWork/app/src/main/res/layout/nav_header.xml" value="0.15677083333333333" />
+        <entry key="..\:/Android Project/Person/FrameWork/app/src/main/res/layout/progress_style.xml" value="0.13333333333333333" />
         <entry key="..\:/Android Project/Person/FrameWork/app/src/main/res/layout/rv.xml" value="0.1359375" />
+        <entry key="..\:/Android Project/Person/FrameWork/app/src/main/res/layout/rv_main.xml" value="0.10562310030395136" />
         <entry key="..\:/Android Project/Person/FrameWork/app/src/main/res/layout/rv_ranking.xml" value="0.1" />
         <entry key="..\:/Android Project/Person/FrameWork/app/src/main/res/layout/tab_home.xml" value="0.152" />
         <entry key="..\:/Android Project/Person/FrameWork/app/src/main/res/layout/toolbar_custom.xml" value="0.17447916666666666" />

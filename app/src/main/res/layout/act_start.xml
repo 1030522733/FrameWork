@@ -13,16 +13,20 @@
         android:background="@color/white"
         tools:context=".ui.act.StartAct">
 
-        <Button
-            android:id="@+id/btStart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="测试"
-            android:textColor="@color/themeColor"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <me.wangyuwei.particleview.ParticleView
+            android:id="@+id/pv_start"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/themeColor"
+            app:pv_background_color="@color/themeColor"
+            app:pv_host_text="玩"
+            app:pv_host_text_size="40sp"
+            app:pv_particle_text="Android"
+            app:pv_particle_text_size="28sp"
+            app:pv_text_color="#FFF"
+            app:pv_text_anim_time="3000"
+            app:pv_spread_anim_time="2000"
+            app:pv_host_text_anim_time="3000"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

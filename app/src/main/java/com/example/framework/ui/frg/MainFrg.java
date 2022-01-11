@@ -18,10 +18,8 @@ import com.example.framework.model.BannerBean;
 import com.example.framework.ui.act.DetailsAct;
 import com.example.framework.ui.adapter.ImageTitleAdapter;
 import com.example.framework.ui.adapter.MainAdapter;
-import com.example.framework.ui.adapter.RankingAdapter;
 import com.example.framework.vm.MainVM;
 import com.youth.banner.indicator.CircleIndicator;
-import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,10 +64,10 @@ public class MainFrg extends BaseFrg<MainVM, FrgMainBinding> {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 ArticleBean.DataBean.DatasBean bean = (ArticleBean.DataBean.DatasBean) adapter.getItem(position);
-                Intent intent = new Intent(App.getContext(),DetailsAct.class);
-                switch (view.getId()){
+                Intent intent = new Intent(App.getContext(), DetailsAct.class);
+                switch (view.getId()) {
                     case R.id.tv_rv_main_title:
-                        intent.putExtra("url",bean.getLink());
+                        intent.putExtra("url", bean.getLink());
                         LogUtils.d(bean.getLink());
                         startActivity(intent);
                         break;
@@ -102,7 +100,7 @@ public class MainFrg extends BaseFrg<MainVM, FrgMainBinding> {
                 .setIndicatorSpace(60);
     }
 
-    public void getMainArticle(){
+    public void getMainArticle() {
         mViewModel.getMainArticle().observe(this, new Observer<ArticleBean>() {
             @SuppressLint("NotifyDataSetChanged")
             @Override

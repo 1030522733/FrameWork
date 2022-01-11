@@ -7,6 +7,8 @@ import com.example.framework.base.BaseAct;
 import com.example.framework.databinding.ActStartBinding;
 import com.example.framework.vm.StartVM;
 
+import me.wangyuwei.particleview.ParticleView;
+
 /**
  * @Author: JianTours
  * @Data: 2021/12/19 20:57
@@ -25,8 +27,12 @@ public class StartAct extends BaseAct<StartVM, ActStartBinding> {
 
     @Override
     protected void runFlow() {
-        binding.btStart.setOnClickListener(view -> {
-            startActivity(new Intent(StartAct.this, HomeAct.class));
+        binding.pvStart.startAnim();
+        binding.pvStart.setOnParticleAnimListener(new ParticleView.ParticleAnimListener() {
+            @Override
+            public void onAnimationEnd() {
+                startActivity(new Intent(StartAct.this,HomeAct.class));
+            }
         });
     }
 }
