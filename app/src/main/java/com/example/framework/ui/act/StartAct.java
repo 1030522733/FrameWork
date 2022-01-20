@@ -32,6 +32,7 @@ public class StartAct extends BaseAct<StartVM, ActStartBinding> {
             @Override
             public void onAnimationEnd() {
                 startActivity(new Intent(StartAct.this,HomeAct.class));
+                finish();
             }
         });
     }

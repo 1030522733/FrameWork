@@ -2,7 +2,9 @@ package com.example.framework.ui.frg;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -65,7 +67,6 @@ public class MainFrg extends BaseFrg<MainVM, FrgMainBinding> {
     protected void runFlow() {
         getBanner();
         getMainArticle();
-
         mainAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
@@ -74,7 +75,7 @@ public class MainFrg extends BaseFrg<MainVM, FrgMainBinding> {
                 switch (view.getId()) {
                     case R.id.tv_rv_main_title:
                         intent.putExtra("url", bean.getLink());
-                        intent.putExtra("title",bean.getTitle());
+                        intent.putExtra("title", bean.getTitle());
                         LogUtils.d(bean.getLink());
                         startActivity(intent);
                         break;
@@ -106,6 +107,9 @@ public class MainFrg extends BaseFrg<MainVM, FrgMainBinding> {
                 .setIndicatorSpace(60);
     }
 
+    /**
+     * 获得文章列表
+     */
     public void getMainArticle() {
         mViewModel.getMainArticle().observe(this, new Observer<ArticleBean>() {
             @SuppressLint("NotifyDataSetChanged")

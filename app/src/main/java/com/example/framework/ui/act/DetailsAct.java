@@ -46,22 +46,21 @@ public class DetailsAct extends BaseAct<StartVM, ActDetailsBinding> {
         tvToolbar = (SampleTextVIew) toolbar.getViewById(R.id.tv_details_toolbar);
         tvToolbar.setText(title);
 
-        //加载网页
-        binding.webDetails.setWebViewClient(new WebViewClient());
-        binding.webDetails.loadUrl(url);
-        binding.webDetails.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                //解决加载出现ERR_UNKNOWN_URL_SCHEME
-                return true;
-            }
-        });
         //解决加载空白屏
         WebSettings webSettings = binding.webDetails.getSettings();
         webSettings.setJavaScriptEnabled(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
+        //解决加载出现ERR_UNKNOWN_URL_SCHEME
+        binding.webDetails.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return false;
+            }
+        });
+        //加载网页
+        binding.webDetails.loadUrl(url);
 
         //进度条
         binding.webDetails.setWebChromeClient(new WebChromeClient() {
@@ -79,6 +78,6 @@ public class DetailsAct extends BaseAct<StartVM, ActDetailsBinding> {
 
     @Override
     protected void runFlow() {
-
+        ivToolbarBack.setOnClickListener(v -> finish());
     }
 }

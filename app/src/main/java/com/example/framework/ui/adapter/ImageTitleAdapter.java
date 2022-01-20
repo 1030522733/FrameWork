@@ -1,13 +1,18 @@
 package com.example.framework.ui.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.framework.R;
+import com.example.framework.base.App;
 import com.example.framework.model.BannerBean;
+import com.example.framework.ui.act.DetailsAct;
 import com.example.framework.ui.viewholder.ImageTitleHolder;
 import com.youth.banner.adapter.BannerAdapter;
 
@@ -37,5 +42,12 @@ public class ImageTitleAdapter extends BannerAdapter<BannerBean.DataBean, ImageT
                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(30)))
                 .into(holder.imageView);
         holder.title.setText(data.getTitle());
+
+        holder.imageView.setOnClickListener(v -> {
+            Intent intent = new Intent(App.getContext(), DetailsAct.class);
+            intent.putExtra("url", data.getUrl());
+            intent.putExtra("title",data.getTitle());
+            ActivityUtils.startActivity(intent);
+        });
     }
 }

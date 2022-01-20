@@ -3,10 +3,12 @@ package com.example.framework.ui.act;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
@@ -30,19 +32,11 @@ import com.google.android.material.tabs.TabLayout;
  */
 public class HomeAct extends BaseAct<HomeVM, ActHomeBinding> {
 
-    /**
-     * 标题栏
-     */
-    private ImageView ivToolbar;
-    private TextView tvToolbar;
-    private ImageView ivHomeFunction;
-
     //几个代表页面的常量
     public static final int PAGE_HOME = 0;
     public static final int PAGE_SQUARE = 1;
     public static final int PAGE_SYSTEM = 2;
     public static final int PAGE_PROJECT = 3;
-
     /**
      * title:标题栏文字
      * titleIcons:标题栏图标
@@ -55,7 +49,12 @@ public class HomeAct extends BaseAct<HomeVM, ActHomeBinding> {
     private final int[] navigation = {R.string.Home, R.string.Square, R.string.System, R.string.Project};
     private final int[] navigationIcons = {R.drawable.selector_tab_home, R.drawable.selector_tab_square,
             R.drawable.selector_tab_system, R.drawable.selector_tab_project};
-
+    /**
+     * 标题栏
+     */
+    private ImageView ivToolbar;
+    private TextView tvToolbar;
+    private ImageView ivHomeFunction;
     /**
      * 头部Navigation
      */
@@ -63,6 +62,8 @@ public class HomeAct extends BaseAct<HomeVM, ActHomeBinding> {
     private TextView tvLogin;
     private TextView tvLevel;
     private TextView tvRanking;
+
+    private long firstTime;
 
     @Override
     protected int getContentViewId() {
@@ -91,8 +92,6 @@ public class HomeAct extends BaseAct<HomeVM, ActHomeBinding> {
         tvRanking.setText("排名:--");
         getIntegral();
 
-
-
         FrgAdapter frgAdapter = new FrgAdapter(getSupportFragmentManager(), this);
         binding.vpHome.setAdapter(frgAdapter);
         binding.vpHome.setOffscreenPageLimit(1);
@@ -103,6 +102,21 @@ public class HomeAct extends BaseAct<HomeVM, ActHomeBinding> {
     protected void onResume() {
         super.onResume();
         getIntegral();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            //1秒两次返回退出应用
+            if ((System.currentTimeMillis() - firstTime) > 1000) {
+                Toast.makeText(App.getContext(), "再按一次退出应用", Toast.LENGTH_SHORT).show();
+                firstTime = System.currentTimeMillis();
+            } else {
+                finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override
@@ -173,7 +187,7 @@ public class HomeAct extends BaseAct<HomeVM, ActHomeBinding> {
                     tvLevel.setText("等级：" + integralBean.getData().getLevel());
                     tvRanking.setText("排名：" + integralBean.getData().getRank());
                     LogUtils.d(integralBean.getData().getUsername());
-                }else {
+                } else {
                     tvLogin.setText("登录");
                     tvLevel.setText("等级:--");
                     tvRanking.setText("排名:--");
