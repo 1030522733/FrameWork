@@ -45,6 +45,6 @@ public interface ApiService {
     /**
      * 首页文章
      */
-    @GET("article/list/1/json")
+    @GET("article/list/0/json")
     Observable<ArticleBean> getMainArticle();
 }

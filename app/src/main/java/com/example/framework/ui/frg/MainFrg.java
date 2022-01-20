@@ -49,7 +49,13 @@ public class MainFrg extends BaseFrg<MainVM, FrgMainBinding> {
 
     @Override
     protected void init() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(App.getContext(), LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(App.getContext(), LinearLayoutManager.VERTICAL, false) {
+            @Override
+            public boolean canScrollVertically() {
+                //解决嵌套滑动卡顿
+                return false;
+            }
+        };
         mainAdapter = new MainAdapter(airicleList);
         binding.rvMain.setLayoutManager(linearLayoutManager);
         binding.rvMain.setAdapter(mainAdapter);
@@ -68,13 +74,13 @@ public class MainFrg extends BaseFrg<MainVM, FrgMainBinding> {
                 switch (view.getId()) {
                     case R.id.tv_rv_main_title:
                         intent.putExtra("url", bean.getLink());
+                        intent.putExtra("title",bean.getTitle());
                         LogUtils.d(bean.getLink());
                         startActivity(intent);
                         break;
                 }
             }
         });
-
     }
 
 

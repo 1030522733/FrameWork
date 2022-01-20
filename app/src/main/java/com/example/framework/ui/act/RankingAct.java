@@ -46,8 +46,8 @@ public class RankingAct extends BaseAct<RankingVM, ActRankingBinding> {
     @Override
     protected void init() {
         ConstraintLayout toolbar = (ConstraintLayout) binding.toolbarRanking;
-        ivToolbar = (ImageView) findViewById(R.id.iv_custom_toolbar);
-        tvToolbar = (TextView) findViewById(R.id.tv_custom_toolbar);
+        ivToolbar = (ImageView) toolbar.getViewById(R.id.iv_custom_toolbar);
+        tvToolbar = (TextView) toolbar.getViewById(R.id.tv_custom_toolbar);
         tvToolbar.setText("积分排行榜");
         ivToolbar.setImageResource(R.mipmap.icon_back);
     }

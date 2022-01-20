@@ -43,8 +43,8 @@ public class LoginAct extends BaseAct<LoginVM, ActLoginBinding> {
     @Override
     protected void init() {
         ConstraintLayout toolbar = (ConstraintLayout) binding.toolbarLogin;
-        ivToolbar = (ImageView) findViewById(R.id.iv_custom_toolbar);
-        TextView tvToolbar = (TextView) findViewById(R.id.tv_custom_toolbar);
+        ivToolbar = (ImageView) toolbar.getViewById(R.id.iv_custom_toolbar);
+        TextView tvToolbar = (TextView) toolbar.getViewById(R.id.tv_custom_toolbar);
         tvToolbar.setText("登录或注册");
     }
 

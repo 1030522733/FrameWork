@@ -8,10 +8,15 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.framework.R;
 import com.example.framework.base.BaseAct;
 import com.example.framework.databinding.ActDetailsBinding;
+import com.example.framework.ui.vv.SampleTextVIew;
 import com.example.framework.vm.StartVM;
 
 /**
@@ -20,8 +25,11 @@ import com.example.framework.vm.StartVM;
  * @Description:
  */
 public class DetailsAct extends BaseAct<StartVM, ActDetailsBinding> {
-
-    private WebSettings webSettings;
+    /**
+     * 标题栏
+     */
+    private ImageView ivToolbarBack, ivToolbarMean;
+    private SampleTextVIew tvToolbar;
 
     @Override
     protected int getContentViewId() {
@@ -30,9 +38,15 @@ public class DetailsAct extends BaseAct<StartVM, ActDetailsBinding> {
 
     @Override
     protected void init() {
-        //加载网页
-        Intent intent =getIntent();
+        Intent intent = getIntent();
         String url = intent.getStringExtra("url");
+        String title = intent.getStringExtra("title");
+        ConstraintLayout toolbar = (ConstraintLayout) binding.toolbarDetails;
+        ivToolbarBack = (ImageView) toolbar.getViewById(R.id.iv_details_back);
+        tvToolbar = (SampleTextVIew) toolbar.getViewById(R.id.tv_details_toolbar);
+        tvToolbar.setText(title);
+
+        //加载网页
         binding.webDetails.setWebViewClient(new WebViewClient());
         binding.webDetails.loadUrl(url);
         binding.webDetails.setWebViewClient(new WebViewClient() {
@@ -43,25 +57,28 @@ public class DetailsAct extends BaseAct<StartVM, ActDetailsBinding> {
             }
         });
         //解决加载空白屏
-        webSettings = binding.webDetails.getSettings();
+        WebSettings webSettings = binding.webDetails.getSettings();
         webSettings.setJavaScriptEnabled(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
-    }
 
-    @Override
-    protected void runFlow() {
-        binding.webDetails.setWebChromeClient(new WebChromeClient(){
+        //进度条
+        binding.webDetails.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
-                if (newProgress == 100){
+                if (newProgress == 100) {
                     binding.progressBar.setVisibility(View.GONE);
-                }else {
+                } else {
                     binding.progressBar.setVisibility(View.VISIBLE);
                     binding.progressBar.setProgress(newProgress);
                 }
             }
         });
+    }
+
+    @Override
+    protected void runFlow() {
+
     }
 }
