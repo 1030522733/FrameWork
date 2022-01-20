@@ -35,6 +35,13 @@ public class DetailsAct extends BaseAct<StartVM, ActDetailsBinding> {
         String url = intent.getStringExtra("url");
         binding.webDetails.setWebViewClient(new WebViewClient());
         binding.webDetails.loadUrl(url);
+        binding.webDetails.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                //解决加载出现ERR_UNKNOWN_URL_SCHEME
+                return true;
+            }
+        });
         //解决加载空白屏
         webSettings = binding.webDetails.getSettings();
         webSettings.setJavaScriptEnabled(true);
