@@ -32,7 +32,6 @@ import java.util.List;
  * @Description:
  */
 public class MainFrg extends BaseFrg<MainVM, FrgMainBinding> {
-
     /**
      * banner数据
      */
@@ -66,7 +65,7 @@ public class MainFrg extends BaseFrg<MainVM, FrgMainBinding> {
     @Override
     protected void runFlow() {
         getBanner();
-        getMainArticle();
+        getMainArticle(0);
         mainAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
@@ -82,6 +81,7 @@ public class MainFrg extends BaseFrg<MainVM, FrgMainBinding> {
                 }
             }
         });
+
     }
 
 
@@ -110,8 +110,8 @@ public class MainFrg extends BaseFrg<MainVM, FrgMainBinding> {
     /**
      * 获得文章列表
      */
-    public void getMainArticle() {
-        mViewModel.getMainArticle().observe(this, new Observer<ArticleBean>() {
+    public void getMainArticle(int top) {
+        mViewModel.getMainArticle(top).observe(this, new Observer<ArticleBean>() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onChanged(ArticleBean articleBean) {

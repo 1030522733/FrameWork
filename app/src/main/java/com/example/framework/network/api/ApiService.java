@@ -9,6 +9,7 @@ import com.example.framework.model.RankingBean;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -45,6 +46,6 @@ public interface ApiService {
     /**
      * 首页文章
      */
-    @GET("article/list/0/json")
-    Observable<ArticleBean> getMainArticle();
+    @GET("article/list/{page}/json")
+    Observable<ArticleBean> getMainArticle(@Path("page") int page);
 }

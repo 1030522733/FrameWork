@@ -32,10 +32,10 @@ public class MainVM extends BaseVM {
     }
 
     @SuppressLint("CheckResult")
-    public MutableLiveData<ArticleBean> getMainArticle() {
+    public MutableLiveData<ArticleBean> getMainArticle(int page) {
         MutableLiveData<ArticleBean> mutableLiveData = new MutableLiveData<>();
         ApiService apiService = NetworkApi.createService(ApiService.class);
-        apiService.getMainArticle().compose(NetworkApi.applySchedulers(new BaseObserver<ArticleBean>() {
+        apiService.getMainArticle(page).compose(NetworkApi.applySchedulers(new BaseObserver<ArticleBean>() {
             @Override
             public void onSucceed(ArticleBean articleBean) {
                 mutableLiveData.setValue(articleBean);
