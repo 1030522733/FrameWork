@@ -11,3 +11,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "FrameWork"
 include ':app'
+include ':JianTours:network'
